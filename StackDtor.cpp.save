@@ -1,0 +1,17 @@
+#include "StackDtor.h"
+
+void StackDtor (struct Stack* st)
+{
+    st->capacity = 0;
+
+    for (size_t i = 0; i < st->size; i++)
+        st->data[i] = 0;
+
+    st->size = 0;
+
+    free (st->data);
+    
+    st->data = NULL;
+   
+    printf ("Stack has been destructed\n");
+}

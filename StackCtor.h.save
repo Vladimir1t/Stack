@@ -1,0 +1,6 @@
+#ifndef STACKCTOR_H_INCLUDED
+#define STACKCTOR_H_INCLUDED
+#include "StructStack.h"
+
+
+#endif // STACKCTOR_H_INCLUDED

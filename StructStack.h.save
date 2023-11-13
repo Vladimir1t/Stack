@@ -1,0 +1,10 @@
+#ifndef STRUCTSTACK_H_INCLUDED
+#define STRUCTSTACK_H_INCLUDED
+
+struct Stack 
+{
+    size_t cp
+}
+
+
+#endif // STRUCTSTACK_H_INCLUDED

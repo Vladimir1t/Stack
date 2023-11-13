@@ -1,0 +1,10 @@
+#ifndef STACKPOP_H_INCLUDED
+#define STACKPOP_H_INCLUDED
+
+#include <stdio.h>
+#include "StructStack.h"
+
+
+
+
+#endif // STACKPOP_H_INCLUDED
