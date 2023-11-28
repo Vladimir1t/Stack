@@ -2,41 +2,42 @@
 #include <stdlib.h>
 #include <assert.h>
 
-#include "StructStack.h"
-#include "StackCtor.h"
-#include "StackPush.h"
-#include "StackPop.h"
-#include "StackDtor.h"
+#include "Stack.h"
 
 int main()
 {
-    Stack st = {};
-    int capacity = 0;
+    Stack stk = {};
+    size_t capacity = 0;
 
     printf ("write the capacity of a Stack\n");
     scanf  ("%d", &capacity);
 
-    StackCtor (&st, capacity);
+    StackCtor (&stk, capacity);
 
-    int numberPush = 0;
+    elem_t value = 0;
+    int check = 0;
 
-    while (numberPush != -1)
+    while (1)
     {
-        printf ("write a number, which you wanted to push\n");
-        while (scanf  ("%d", &numberPush) != 1)
-            printf ("try again");
+        printf ("write a number, which you wanted to push. If you want to stop, write -1\n");
+        if (scanf ("%lg", &value) != 1)
+        {
+            printf ("Error\n");
+            break;
+        }
 
-        StackPush (&st, numberPush);
+        if (value == -1)
+            break;
+        StackPush (&stk, &value);
     }
-    for (int i = 0; i < st.size; i++)
-        printf ("%d) %d\n", i, st.data[i]);
 
-    int element = StackPop (&st);
+    elem_t element = POISON;
+    StackPop (&stk, &element);
 
-    for (int i = 0; i < st.size; i++)
-        printf ("%d) %d\n", i, st.data[i]);
+    for (int i = 0; i < stk.size; i++)
+        printf ("%d) %lg\n", i, stk.data[i]);
 
-    StackDtor (&st);
+    StackDtor (&stk);
 
     return 0;
 }
