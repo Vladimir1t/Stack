@@ -8,6 +8,8 @@ void StackCtor (struct Stack* stk, const size_t capacity)
     stk->size = 0;
     stk->capacity = capacity;
     stk->data = (elem_t*) calloc (stk->capacity, sizeof(elem_t));
+    if (stk->data == NULL)
+        fputs ("ERROR. Calloc", ERROR_FILE);
 
     for (int i = 0; i < capacity; i++)
         stk->data[i] = POISON;
