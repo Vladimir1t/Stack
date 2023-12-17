@@ -6,6 +6,7 @@
 
 int main()
 {
+    FILE* logfile = fopen ("fileDump.txt", "w");
     Stack stk = {};
     size_t capacity = 0;
 
@@ -34,8 +35,7 @@ int main()
     elem_t element = POISON;
     StackPop (&stk, &element);
 
-    for (int i = 0; i < stk.size; i++)
-        printf ("%d) %lg\n", i, stk.data[i]);
+    Dump (&stk, logfile);
 
     StackDtor (&stk);
 

@@ -5,8 +5,10 @@
 #include <stdlib.h>
 #include <assert.h>
 
-typedef double elem_t;
-const elem_t POISON = -1.0;
+#define SPEC "%d"
+
+typedef int elem_t;
+const elem_t POISON = 0xDEAD;
 
 struct Stack
 {
@@ -34,5 +36,7 @@ int StackReallocIncrease (Stack* stk);
 int StackReallocDecrease (Stack* stk);
 
 void Verifier (Stack* stk);
+
+void Dump (Stack* stk, FILE* file);
 
 #endif // STACK_H_INCLUDED
