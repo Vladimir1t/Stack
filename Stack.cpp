@@ -4,7 +4,8 @@ FILE* ERROR_FILE = fopen ("errorF.txt", "w");
 
 void StackCtor (struct Stack* stk, const size_t capacity)
 {
-    assert (capacity > 0);
+    if (capacity <= 0)
+        fprintf ( ERROR_FILE, "Error. Capacity <= 0\n");
     stk->size = 0;
     stk->capacity = capacity;
     stk->data = (elem_t*) calloc (stk->capacity, sizeof(elem_t));
@@ -154,5 +155,10 @@ void Verifier (struct Stack* stk)
     {
         if (stk->data[i] == POISON)
             fprintf (ERROR_FILE, "element [%d] = POISON value\n", i);
+    }
+    for (int i = stk->size; i < stk->capacity; i++)
+    {
+        if (stk->data[i] != POISON)
+            fprintf (ERROR_FILE, "element [%d] != POISON value\n", i);
     }
 }

@@ -23,6 +23,13 @@ enum ReallocMod
     REALLOC_ERR = 0
 };
 
+enum Errors
+{
+    CAPACITY_BELLOW_ZERO = 0,
+    SIZE_BELLOW_ZERO = 1,
+
+};
+
 void StackCtor (Stack* stk, const size_t capacity);
 
 void StackPush (Stack* stk, const elem_t* value);
