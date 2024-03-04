@@ -1,4 +1,4 @@
-#include "Stack.h"
+#include "..\include\stack.h"
 
 FILE* ERROR_FILE = fopen ("errorF.txt", "w");
 
@@ -9,8 +9,9 @@ void StackCtor (struct Stack* stk, const size_t capacity)
     stk->size = 0;
     stk->capacity = capacity;
     stk->data = (elem_t*) calloc (stk->capacity, sizeof(elem_t));
+
     if (stk->data == NULL)
-        fputs ("ERROR. Calloc", ERROR_FILE);
+        fprintf (ERROR_FILE, "ERROR. Calloc");
 
     for (int i = 0; i < capacity; i++)
         stk->data[i] = POISON;
@@ -26,7 +27,6 @@ void StackPush (struct Stack* stk, const elem_t* value)
         StackReallocIncrease (stk);
 
     stk->data[stk->size] = *value;
-    //printf ("StackPush(): element = %d\n", stP->data[stP->size]);
 
     stk->size++;
 
@@ -41,8 +41,8 @@ void StackPop (struct Stack* stk, elem_t* element)
 
     if (stk->size == 0)
     {
-        printf ("there are no numbers to be popped\n");
-        fputs ("<< there are no numbers to be popped >>\n", ERROR_FILE);
+        printf  ("there are no numbers to be popped\n");
+        fprintf (ERROR_FILE, "<< there are no numbers to be popped >>\n");
     }
 
     if (stk->size * 4 < stk->capacity)
@@ -50,7 +50,7 @@ void StackPop (struct Stack* stk, elem_t* element)
 
     *element = stk->data[stk->size - 1];
     stk->data[stk->size - 1] = POISON;
-    //printf ("StackPop(): popped number = %d\n", *element);
+
     stk->size--;
 
     Verifier (stk);
@@ -81,7 +81,7 @@ int StackReallocIncrease (struct Stack* stk)
      if (stk->data == NULL)
      {
         stk->data = pointer;
-        fputs ("<< Realloc increase error >>\n", ERROR_FILE);
+        fprintf (ERROR_FILE, "<< Realloc increase error >>\n");
         return REALLOC_ERR;
      }
      for (int i = stk->capacity; i < stk->capacity * 2; i++)
@@ -103,7 +103,7 @@ int StackReallocDecrease (struct Stack* stk)
      if (stk->data == NULL)
      {
         stk->data = pointer;
-        fputs ("<< Realloc decrease error >>\n", ERROR_FILE);
+        fprintf (ERROR_FILE, "<< Realloc decrease error >>\n");
         return REALLOC_ERR;
      }
      stk->capacity /= 2;
@@ -118,18 +118,20 @@ void Dump (struct Stack* stk, FILE* logFile)
     Verifier (stk);
     assert (logFile != NULL);
 
-    fputs ("-----------------\n", logFile);
-    fputs ("Stack dump\n", logFile);
+    fprintf (logFile, "------------------\n");
+    fprintf (logFile, "----Stack dump----\n");
+    fprintf (logFile, "------------------\n");
+
     fprintf (logFile, "capacity: %d\n", stk->capacity);
     fprintf (logFile, "size: %d\n", stk->size);
 
     for (int i = 0; i < stk->size; i++)
         fprintf (logFile, "[%d] " SPEC "\n", i, stk->data[i]);
-    fputs ("-----------------\n", logFile);
+    fprintf (logFile, "------------------\n");
 
     for (int i = stk->size; i < stk->capacity; i++)
         fprintf (logFile, "[%d] " SPEC "\n", i, stk->data[i]);
-    fputs ("-----------------\n", logFile);
+    fprintf (logFile, "------------------\n");
 
     Verifier (stk);
 }
@@ -137,19 +139,19 @@ void Dump (struct Stack* stk, FILE* logFile)
 void Verifier (struct Stack* stk)
 {
     if (stk == NULL)
-        fputs ("Error: Stack = NULL\n", ERROR_FILE);
+        fprintf (ERROR_FILE, "Error: Stack = NULL\n");
 
     if (stk->data == NULL)
-        fputs ("Error: stk.data = NULL\n", ERROR_FILE);
+        fprintf (ERROR_FILE, "Error: stk.data = NULL\n");
 
     if (stk->capacity < stk->size)
-        fputs ("Error: capacity < size\n", ERROR_FILE);
+        fprintf (ERROR_FILE, "Error: capacity < size\n");
 
     if (stk->capacity < 0)
-        fputs ("ERROR: capacity < 0\n", ERROR_FILE);
+        fprintf (ERROR_FILE, "ERROR: capacity < 0\n");
 
-    if (stk->size <= 0)
-        fputs ("ERROR: size <= 0\n", ERROR_FILE);
+    if (stk->size < 0)
+        fprintf (ERROR_FILE, "ERROR: size < 0\n");
 
     for (int i = 0; i < stk->size; i++)
     {

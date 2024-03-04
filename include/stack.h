@@ -27,7 +27,6 @@ enum Errors
 {
     CAPACITY_BELLOW_ZERO = 0,
     SIZE_BELLOW_ZERO = 1,
-
 };
 
 void StackCtor (Stack* stk, const size_t capacity);
