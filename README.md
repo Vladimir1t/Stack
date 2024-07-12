@@ -1,5 +1,6 @@
 **Stack: A C Program for Implementing a Stack Data Structure**
 
+---
 **Introduction:**
 
 A stack is a linear data structure that follows the Last-In-First-Out (LIFO) principle, meaning the last element added to the stack is the first one to be removed. This program provides a comprehensive implementation of a stack in C, including functions for creating, pushing, popping, and destroying the stack, as well as reallocation functions to handle dynamic memory management.
